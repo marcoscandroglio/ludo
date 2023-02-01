@@ -1,5 +1,7 @@
 
-# portfolio-project
+# Ludo Game
+
+This is the portfolio project for CS162 Summer 2022
 
 For this project you will write a class called LudoGame that allows two to four people to play a simplified version of the game (https://en.wikipedia.org/wiki/Ludo_(board_game)).
 
