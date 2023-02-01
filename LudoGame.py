@@ -90,6 +90,7 @@ class Player:
         """
 
         position = self._current_position['p']
+
         if position == 'H':
             return -1
         elif position == 'R':
@@ -113,6 +114,7 @@ class Player:
         """
 
         position = self._current_position['q']
+
         if position == 'H':
             return -1
         elif position == 'R':
@@ -183,6 +185,7 @@ class Player:
         """
 
         collapsed_dict = list(set(list(self.get_current_position().values())))
+
         if len(collapsed_dict) == 1 and collapsed_dict[0] == 'E':
             self._current_state = True
             return self._current_state
@@ -237,6 +240,7 @@ class LudoGame:
         """
 
         position_dict = list(self._player_dict.keys())
+
         if player_position in position_dict:
             return self._player_dict[player_position]
 
@@ -256,6 +260,7 @@ class LudoGame:
         new_dictionary = self._player_dict.copy()
         del new_dictionary[player_object.get_position()]
         opponent_dictionary = new_dictionary
+
         return opponent_dictionary
 
     def move_token(self, player_object, token_name, token_steps):
@@ -273,6 +278,7 @@ class LudoGame:
 
         opponents = self.get_opponents(player_object)
         opponent_position_list = []
+
         for opponent in opponents:
             opp_p_pos = opponents[opponent].get_space_name(opponents[opponent].get_token_p_step_count())
             opp_q_pos = opponents[opponent].get_space_name(opponents[opponent].get_token_q_step_count())
@@ -281,12 +287,15 @@ class LudoGame:
 
         if token_name == 'p':
             position = player_object.get_token_p_step_count()
+
         if token_name == 'q':
             position = player_object.get_token_q_step_count()
 
         new_position = position + token_steps
+
         if 57 < new_position:
             token_steps = (57 - position) - (position + token_steps - 57)
+
         new_position = position + token_steps
         token_next_space = player_object.get_space_name(position + token_steps)
 
@@ -321,7 +330,6 @@ class LudoGame:
             self._player_dict[player] = Player(player)
 
         for turn in turns_list:
-
             player_object = self._player_dict[turn[0]]
             moves = turn[1]
             # for determining if a token is in the Home Yard
@@ -334,6 +342,7 @@ class LudoGame:
             # for comparing moves against the spaces of opposing tokens
             opponents = self.get_opponents(player_object)
             opponent_position_list = []
+
             for opp in opponents:
                 opp_p_pos = opponents[opp].get_space_name(opponents[opp].get_token_p_step_count())
                 opp_q_pos = opponents[opp].get_space_name(opponents[opp].get_token_q_step_count())
@@ -409,8 +418,9 @@ class LudoGame:
                 self.move_token(player_object, 'q', moves)
 
         end_list = []
-        for player in self._player_dict.values():
 
+        for player in self._player_dict.values():
             end_list.append(player.get_space_name(player.get_token_p_step_count()))
             end_list.append(player.get_space_name(player.get_token_q_step_count()))
+
         return end_list
